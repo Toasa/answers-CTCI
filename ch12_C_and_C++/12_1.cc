@@ -2,16 +2,23 @@
 #include <fstream>
 
 void printLastKLines(std::ifstream &file, int K) {
-    std::stack<std::string> lines;
+    // circular array
+    std::string *lines = (std::string *)calloc(1, sizeof(std::string *) * K);
+    int i = 0;
 
     std::string line;
     while (getline(file, line)){
-        lines.push(line);
+        lines[i] = line;
+        i++;
+        i %= K;
     }
 
-    for (int i = 0; i < K; i++) {
-        std::cout << lines.top() << std::endl;
-        lines.pop();
+    int j = i;
+    while (1) {
+        std::cout << lines[j] << std::endl;
+        j = (j+1)%K;
+        if (i == j)
+            break;
     }
 }
 
