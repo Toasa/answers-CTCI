@@ -1,25 +1,25 @@
 #include <iostream>
 
-class Animal {
-    int id;
-
-    public:
-    void aboutMe() {
-        std::cout << "I'm animal" << std::endl;
+struct Base {
+    virtual void f1() {
+        std::cout << "f1 in Base" << std::endl;
+    }
+    virtual void f2() {
+        std::cout << "f2 in Base" << std::endl;
     }
 };
 
-class Cat : public Animal {
-    public:
-    void aboutMe() {
-        std::cout << "I'm cat" << std::endl;
+struct D1 : Base {
+    void f1() {
+        std::cout << "f1 in D1" << std::endl;
     }
 };
 
 int main() {
-    Animal *a = new Animal();
-    a->aboutMe();
-    Cat *c = new Cat();
-    c->aboutMe();
+    Base *b1 = new Base();
+    Base *d1 = new D1();
+
+    b1->f1();
+    d1->f1();
 }
 
